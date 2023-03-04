@@ -1,8 +1,11 @@
+
+
+
 const BASE_URL = "http://localhost:3000"
 const div = document.getElementById('div')
 
 function submitData(name, email){
-    fetch(BASE_URL + '/users', {
+    return fetch(BASE_URL + '/users', {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -10,7 +13,7 @@ function submitData(name, email){
         },
         body: JSON.stringify({
             name: name,
-            email: email
+            email: email,
         })
     })
     .then(resp => resp.json())
@@ -20,8 +23,14 @@ function submitData(name, email){
         div.appendChild(newId)
     })
     .catch(error => {
+        const errorMessage = error.message
         const newError = document.createElement('p')
-        newError.textContent = (error)
-        div.appendChild(error)
+        newError.textContent = errorMessage
+        div.appendChild(newError)
     })
 }
+
+
+// submitData('Steve', 'steve@steve.com')
+
+
